@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang CV/Portfolio Nguyễn Hoàng Tuấn</title>
+    
+    <!-- Tải Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tải Font Awesome cho icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tải Google Font (Be Vietnam Pro) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tải thư viện Spline Viewer -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.38/build/spline-viewer.js"></script>
+    <style>
+        /* CSS tùy chỉnh */
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #6ca7ff;
+        }
+        .dark body {
+            background-color: #111827;
+        }
+        .tab-active {
+            color: #6d28d9;
+            border-color: #6d28d9;
+        }
+        .dark .tab-active {
+            color: #a78bfa;
+            border-color: #a78bfa;
+        }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+        
+        /* CSS cho Modal */
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .modal-hidden {
+            pointer-events: none;
+        }
+        .modal-hidden .modal-overlay {
+            opacity: 0;
+        }
+        .modal-hidden .modal-content {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        /* Đảm bảo canvas của three.js và spline lấp đầy container */
+        #3d-canvas, spline-viewer {
+            width: 100%;
+            height: 100%;
+            display: block;
+            outline: none;
+        }
+    </style>
+</head>
+<body class="dark:bg-gray-900">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-6 lg:p-8">
+        <!-- PHẦN HEADER PROFILE -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+            <!-- SỬA LỖI: Thay thế đường dẫn cục bộ bằng URL công khai -->
+            <div class="h-48 bg-cover bg-center" style="background-image: url('./Picture/maxresdefault.jpg')"></div>
+            
+            <!-- Thông tin chính -->
+            <div class="p-6 text-center -mt-24">
+                <!-- SỬA LỖI: Thay thế đường dẫn cục bộ bằng URL công khai -->
+                <img class="h-36 w-36 rounded-full border-4 border-white dark:border-gray-800 object-cover shadow-lg mx-auto" 
+                     src="./Picture/Ảnh_đại_diện.jpg" 
+                     alt="Ảnh đại diện"
+                     onerror="this.onerror=null;this.src='https://placehold.co/256x256/e2e8f0/64748b?text=Ảnh';">
+                
+                <h1 class="text-3xl font-bold text-gray-800 dark:text-white mt-4">Nguyễn Hoàng Tuấn</h1>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Studying at High School for Gifted Students, Hanoi University of Science (HUS), Vietnam National University (VNU), Hanoi</p>
+                
+                <div class="mt-6 flex justify-center gap-4">
+                    <a href="https://www.facebook.com/nguyen.tuan.381156/" target="_blank" rel="noopener noreferrer" class="inline-block bg-violet-600 hover:bg-violet-700 text-white font-semibold py-2 px-6 rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-user-plus mr-2"></i> Follow
+                    </a>
+                    <!-- SỬA LỖI: Sửa lại định dạng email -->
+                    <a href="mailto:nguyentokky@example.com" class="inline-block bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white font-semibold py-2 px-6 rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-envelope mr-2"></i> Message
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tabs điều hướng -->
+            <div class="border-t border-gray-200 dark:border-gray-700">
+                <nav class="flex justify-center -mb-px">
+                    <button data-target="timeline" class="tab-button tab-active text-gray-600 dark:text-gray-300 py-4 px-6 block hover:text-violet-600 dark:hover:text-violet-400 focus:outline-none font-medium border-b-2">
+                        <i class="fas fa-stream mr-2"></i> Timeline
+                    </button>
+                    <button data-target="photos" class="tab-button text-gray-600 dark:text-gray-300 py-4 px-6 block hover:text-violet-600 dark:hover:text-violet-400 focus:outline-none font-medium border-b-2 border-transparent">
+                        <i class="fas fa-images mr-2"></i> Picture
+                    </button>
+                    <button data-target="videos" class="tab-button text-gray-600 dark:text-gray-300 py-4 px-6 block hover:text-violet-600 dark:hover:text-violet-400 focus:outline-none font-medium border-b-2 border-transparent">
+                        <i class="fas fa-video mr-2"></i> Video
+                    </button>
+                    <button data-target="3d-models" class="tab-button text-gray-600 dark:text-gray-300 py-4 px-6 block hover:text-violet-600 dark:hover:text-violet-400 focus:outline-none font-medium border-b-2 border-transparent">
+                        <i class="fas fa-cubes mr-2"></i> 3D
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- PHẦN NỘI DUNG TABS -->
+        <div class="mt-8">
+            <!-- Panel Timeline -->
+            <div id="timeline" class="tab-panel active">
+                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Internship experience</h2>
+                    <div class="relative border-l-2 border-black-200 dark:border-gray-600 ml-4">
+                        <div class="mb-8 ml-8"><span class="absolute -left-5 flex items-center justify-center w-10 h-10 bg-violet-200 rounded-full ring-8 ring-white dark:ring-gray-800 dark:bg-violet-900"><i class="fas fa-solid fa-robot text-violet-600 dark:text-violet-400"></i></span><h3 class="text-lg font-semibold text-gray-900 dark:text-white">Elementary School STEM AI</h3><p class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Binh Minh | 6-7/2025</p><p class="text-base font-normal text-gray-600 dark:text-gray-300">Participate in assembling and testing STEM models integrated with artificial intelligence suitable for children from grades 1 to 5.</p></div>
+                        <div class="mb-8 ml-8"><span class="absolute -left-5 flex items-center justify-center w-10 h-10 bg-violet-200 rounded-full ring-8 ring-white dark:ring-gray-800 dark:bg-violet-900"><i class="fas fa-solid fa-school text-violet-600 dark:text-violet-400"></i></span><h3 class="text-lg font-semibold text-gray-900 dark:text-white">Secondary School STEM AI</h3><p class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Binh Minh | 6-7/2025</p><p class="text-base font-normal text-gray-600 dark:text-gray-300">Participate in school field trips, instruct students on how to operate and program models.</p></div>
+                        <div class="ml-8"><span class="absolute -left-5 flex items-center justify-center w-10 h-10 bg-violet-200 rounded-full ring-8 ring-white dark:ring-gray-800 dark:bg-violet-900"><i class="fas fa-light fa-cube text-violet-600 dark:text-violet-400"></i></span><h3 class="text-lg font-semibold text-gray-900 dark:text-white">3D Modeling</h3><p class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Binh Minh | 6-7/2025</p><p class="text-base font-normal text-gray-600 dark:text-gray-300">Build 3D models of STEM models integrating artificial intelligence.</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Ảnh -->
+            <div id="photos" class="tab-panel">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Photo Gallery</h2>
+                    <div id="photo-gallery" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="group relative cursor-pointer"><img class="gallery-item h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105" src="./Robot/z6796195514531_8b62a4312eebb73038160cb49981f71f.jpg" alt="Ảnh dự án 1"></div>
+                        <div class="group relative cursor-pointer"><img class="gallery-item h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105" src="./Robot/z6825587813754_68794c5ac5c31de7e1ed4c4945b245d5.jpg" alt="Ảnh dự án 2"></div>
+                        <div class="group relative cursor-pointer"><img class="gallery-item h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105" src="./Robot/z6842077220376_e944125cb5af4fc053e64cd7d77fecf9.jpg" alt="Ảnh dự án 3"></div>
+                        <div class="group relative cursor-pointer"><img class="gallery-item h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105" src="./Robot/z6825833009735_52d331538137ebdbfe1293603ce4ef11.jpg" alt="Ảnh dự án 4"></div>
+                        <div class="group relative cursor-pointer"><img class="gallery-item h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105" src="./Robot/z6796248346864_c5a02f00ef1922429685baa21ff59256.jpg" alt="Ảnh dự án 5"></div>
+                        <div class="group relative cursor-pointer"><img class="gallery-item h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105" src="./Robot/z6842222397038_5c6ca75b0e6187b7d3545591fe8ed09d.jpg" alt="Ảnh dự án 6"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Video -->
+            <div id="videos" class="tab-panel">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                   <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Video library</h2>
+                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                       <div class="video-item group relative rounded-lg overflow-hidden shadow-lg cursor-pointer" data-youtube-id="Ena9oHXRA7I">
+                           <img class="w-full h-48 object-cover" src="./Robot/maxresdefault.jpg" alt="Video Robot Bird STEAM AI">
+                           <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center"><div class="w-16 h-16 bg-white bg-opacity-30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"><i class="fas fa-play text-white text-3xl"></i></div></div>
+                       </div>
+                       <div class="video-item group relative rounded-lg overflow-hidden shadow-lg cursor-pointer" data-youtube-id="yg2sPPIzaEs">
+                           <img class="w-full h-48 object-cover" src="./Robot/maxresdefault (1).jpg" alt="Video Traffic light">
+                           <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center"><div class="w-16 h-16 bg-white bg-opacity-30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"><i class="fas fa-play text-white text-3xl"></i></div></div>
+                       </div>
+                       <div class="video-item group relative rounded-lg overflow-hidden shadow-lg cursor-pointer" data-youtube-id="SXMakGrYgAg">
+                           <img class="w-full h-48 object-cover" src="./Robot/maxresdefault (2).jpg" alt="Video AI classify dog and cat">
+                           <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center"><div class="w-16 h-16 bg-white bg-opacity-30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"><i class="fas fa-play text-white text-3xl"></i></div></div>
+                       </div>
+                       <div class="video-item group relative rounded-lg overflow-hidden shadow-lg cursor-pointer" data-youtube-id="k4y2XTxBFMQ">
+                           <img class="w-full h-48 object-cover" src="./Robot/maxresdefault (3).jpg" alt="Video Robot fighter">
+                           <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center"><div class="w-16 h-16 bg-white bg-opacity-30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"><i class="fas fa-play text-white text-3xl"></i></div></div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+            
+            <!-- Panel 3D Models -->
+            <div id="3d-models" class="tab-panel">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">3D Modeling</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- SỬA LỖI: Thay đổi class thành "spline-item" để mở đúng popup -->
+                        <div class="spline-item group relative rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 cursor-pointer">
+                            <!-- SỬA LỖI: Thay thế đường dẫn cục bộ bằng URL công khai -->
+                            <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1665686304312-0a93470553a5?q=80&w=1374&auto=format&fit=crop" alt="Mô hình Spline">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-4">
+                                <h3 class="text-lg font-bold text-white">Robot Cat</h3>
+                                <p class="text-sm text-gray-300">Mô hình mẫu từ Công ty Bình Minh AI.</p>
+                            </div>
+                            <div class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">SPLINE</div>
+                        </div>
+                        <!-- Thẻ này vẫn mở popup Three.js -->
+                        <div class="model-item group relative rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 cursor-pointer" data-model-src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF-Binary/DamagedHelmet.glb">
+                            <!-- SỬA LỖI: Thay thế đường dẫn cục bộ bằng URL công khai -->
+                            <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1582220159429-58defa425547?q=80&w=1374&auto=format&fit=crop" alt="Mô hình 3D 2">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-4">
+                                <h3 class="text-lg font-bold text-white">Robot Dog</h3>
+                                <p class="text-sm text-gray-300">Mô hình kinh điển cho PBR.</p>
+                            </div>
+                            <div class="absolute top-4 right-4 bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded">THREE.JS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALS / POPUPS -->
+    <div id="lightbox-modal" class="modal-hidden fixed inset-0 z-50 flex items-center justify-center p-4"><div class="modal-overlay fixed inset-0 bg-black/80"></div><div class="modal-content relative w-full h-full max-w-4xl max-h-4xl flex items-center justify-center"><img id="lightbox-image" src="" class="max-w-full max-h-full object-contain rounded-lg" alt="Ảnh phóng to"><button id="lightbox-close" class="absolute -top-2 -right-2 md:top-2 md:right-2 text-white bg-black/50 rounded-full w-10 h-10 flex items-center justify-center text-2xl hover:bg-black/80 transition">×</button><button id="lightbox-prev" class="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 text-white bg-black/50 rounded-full w-12 h-12 flex items-center justify-center text-2xl hover:bg-black/80 transition"><i class="fas fa-chevron-left"></i></button><button id="lightbox-next" class="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 text-white bg-black/50 rounded-full w-12 h-12 flex items-center justify-center text-2xl hover:bg-black/80 transition"><i class="fas fa-chevron-right"></i></button></div></div>
+    
+    <div id="video-modal" class="modal-hidden fixed inset-0 z-50 flex items-center justify-center p-4"><div class="modal-overlay fixed inset-0 bg-black/80"></div><div class="modal-content relative w-full max-w-3xl"><button id="video-close" class="absolute -top-10 right-0 text-white text-4xl cursor-pointer">×</button><div id="video-player-container" class="w-full aspect-video bg-black rounded-lg overflow-hidden shadow-lg"></div></div></div>
+
+    <div id="3d-modal" class="modal-hidden fixed inset-0 z-50 flex items-center justify-center p-4"><div class="modal-overlay fixed inset-0 bg-black/80"></div><div class="modal-content relative w-full h-full max-w-4xl max-h-4xl bg-gray-700 rounded-lg overflow-hidden"><div id="3d-viewer-container" class="w-full h-full"><div id="3d-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-700 text-white"><i class="fas fa-spinner fa-spin text-4xl"></i><p class="mt-4">Đang tải mô hình 3D...</p></div></div><button id="3d-close" class="absolute top-2 right-2 text-white bg-black/50 rounded-full w-10 h-10 flex items-center justify-center text-2xl hover:bg-black/80 transition">×</button></div></div>
+
+      <!-- Popup cho Spline Viewer -->
+      <div id="spline-modal" class="modal-hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="modal-overlay fixed inset-0 bg-black/80"></div>
+        <div class="modal-content relative w-full h-full max-w-4xl max-h-4xl bg-gray-800 rounded-lg overflow-hidden">
+            <spline-viewer loading-anim-type="spinner" url="https://prod.spline.design/40YuTVcrlJUFA-Se/scene.splinecode"></spline-viewer>
+            <button id="spline-close" class="absolute top-2 right-2 text-white bg-black/50 rounded-full w-10 h-10 flex items-center justify-center text-2xl hover:bg-black/80 transition">×</button>
+        </div>
+    </div>
+    <!-- SCRIPT CHO UI (Tabs, Lightbox, Video Modal) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Tab Chuyển đổi ---
+            const tabs = document.querySelectorAll('.tab-button');
+            const panels = document.querySelectorAll('.tab-panel');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetId = tab.dataset.target;
+                    const targetPanel = document.getElementById(targetId);
+                    
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    tab.classList.add('tab-active');
+                    
+                    panels.forEach(panel => panel.classList.remove('active'));
+                    if (targetPanel) {
+                        targetPanel.classList.add('active');
+                    }
+                });
+            });
+
+            // --- Lightbox cho Ảnh ---
+            const lightboxModal = document.getElementById('lightbox-modal');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+            let currentIndex = 0;
+
+            function showImage(index) {
+                currentIndex = index;
+                lightboxImage.src = galleryItems[index].src;
+                lightboxModal.classList.remove('modal-hidden');
+            }
+
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => showImage(index));
+            });
+
+            document.getElementById('lightbox-close').addEventListener('click', () => lightboxModal.classList.add('modal-hidden'));
+            document.getElementById('lightbox-prev').addEventListener('click', () => showImage((currentIndex - 1 + galleryItems.length) % galleryItems.length));
+            document.getElementById('lightbox-next').addEventListener('click', () => showImage((currentIndex + 1) % galleryItems.length));
+            lightboxModal.querySelector('.modal-overlay').addEventListener('click', () => lightboxModal.classList.add('modal-hidden'));
+
+            // --- Modal cho Video ---
+            const videoModal = document.getElementById('video-modal');
+            const videoPlayerContainer = document.getElementById('video-player-container');
+            document.querySelectorAll('.video-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const youtubeId = item.dataset.youtubeId;
+                    videoPlayerContainer.innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                    videoModal.classList.remove('modal-hidden');
+                });
+            });
+
+            function closeVideoModal() {
+                videoPlayerContainer.innerHTML = '';
+                videoModal.classList.add('modal-hidden');
+            }
+            document.getElementById('video-close').addEventListener('click', closeVideoModal);
+            videoModal.querySelector('.modal-overlay').addEventListener('click', closeVideoModal);
+
+             // --- Modal cho Spline ---
+             const splineModal = document.getElementById('spline-modal');
+            document.querySelectorAll('.spline-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    splineModal.classList.remove('modal-hidden');
+                });
+            });
+            function closeSplineModal() {
+                splineModal.classList.add('modal-hidden');
+            }
+            document.getElementById('spline-close').addEventListener('click', closeSplineModal);
+            splineModal.querySelector('.modal-overlay').addEventListener('click', closeSplineModal);
+        });
+    </script>
+    
+    <!-- SCRIPT CHO 3D VIEWER (MODULE) -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const modelModal = document.getElementById('3d-modal');
+            if (!modelModal) return; // Dừng nếu không có modal 3D
+
+            const modelViewerContainer = document.getElementById('3d-viewer-container');
+            const modelLoaderElement = document.getElementById('3d-loader');
+            let scene, camera, renderer, controls, model;
+
+            function init3DScene() {
+                scene = new THREE.Scene();
+                scene.background = new THREE.Color(0x4a5568);
+
+                camera = new THREE.PerspectiveCamera(75, modelViewerContainer.clientWidth / modelViewerContainer.clientHeight, 0.1, 1000);
+                camera.position.z = 5;
+
+                renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setSize(modelViewerContainer.clientWidth, modelViewerContainer.clientHeight);
+                renderer.setPixelRatio(window.devicePixelRatio);
+                modelViewerContainer.appendChild(renderer.domElement);
+                
+                const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+                scene.add(ambientLight);
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+                directionalLight.position.set(5, 10, 7.5);
+                scene.add(directionalLight);
+
+                controls = new OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+            }
+
+            function loadModel(modelSrc) {
+                if (!scene) init3DScene();
+                
+                modelLoaderElement.classList.remove('hidden');
+
+                if (model) scene.remove(model);
+
+                const loader = new GLTFLoader();
+                loader.load(modelSrc, (gltf) => {
+                    model = gltf.scene;
+                    const box = new THREE.Box3().setFromObject(model);
+                    const center = box.getCenter(new THREE.Vector3());
+                    const size = box.getSize(new THREE.Vector3());
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    const scale = 3 / maxDim;
+                    model.scale.set(scale, scale, scale);
+                    model.position.sub(center.multiplyScalar(scale));
+                    scene.add(model);
+                    modelLoaderElement.classList.add('hidden');
+                }, undefined, (error) => {
+                    console.error('Lỗi tải mô hình 3D:', error);
+                    modelLoaderElement.innerHTML = '<p class="text-red-500">Lỗi khi tải mô hình.</p>';
+                });
+            }
+
+            function animate() {
+                if (modelModal.classList.contains('modal-hidden')) return;
+                requestAnimationFrame(animate);
+                controls.update();
+                renderer.render(scene, camera);
+            }
+            
+            function onWindowResize() {
+                if(camera && renderer) {
+                    camera.aspect = modelViewerContainer.clientWidth / modelViewerContainer.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(modelViewerContainer.clientWidth, modelViewerContainer.clientHeight);
+                }
+            }
+            window.addEventListener('resize', onWindowResize);
+
+            document.querySelectorAll('.model-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const modelSrc = item.dataset.modelSrc;
+                    modelModal.classList.remove('modal-hidden');
+                    loadModel(modelSrc);
+                    animate();
+                });
+            });
+            
+            function close3DModal() {
+                modelModal.classList.add('modal-hidden');
+                if (model) scene.remove(model);
+            }
+
+            document.getElementById('3d-close').addEventListener('click', close3DModal);
+            modelModal.querySelector('.modal-overlay').addEventListener('click', close3DModal);
+        });
+    </script>
+    
+</body>
+</ht
