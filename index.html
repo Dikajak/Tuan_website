@@ -121,7 +121,7 @@
   <!-- Nút chính -->
   <button
     class="text-gray-600 dark:text-gray-300 py-4 px-6 block w-full hover:text-violet-600 dark:hover:text-violet-400 focus:outline-none font-medium border-b-2 border-transparent">
-    <i class="fas fa-folder mr-2"></i> Internship Project <i class="fas fa-caret-down ml-1"></i>
+    <i class="fas fa-folder mr-2"></i>Internship project <i class="fas fa-caret-down ml-1"></i>
   </button>
 
   <!-- Menu con: dễ rê chuột hơn -->
@@ -143,6 +143,37 @@
     </button>
   </div>
 </div>
+
+<!-- Archivement Dropdown ngang -->
+<div class="relative group">
+  <!-- Nút chính -->
+  <button
+    class="text-gray-600 dark:text-gray-300 py-4 px-6 block w-full hover:text-violet-600 dark:hover:text-violet-400 focus:outline-none font-medium border-b-2 border-transparent">
+    <i class="fas fa-trophy mr-2"></i> Archivement <i class="fas fa-caret-down ml-1"></i>
+  </button>
+
+  <!-- Menu con ngang khi hover -->
+  <div
+    class="absolute top-full left-1/2 -translate-x-1/2 mt-1 group-hover:block hidden bg-white dark:bg-gray-800 shadow-lg rounded-md z-50 min-w-[180px] transition duration-150 ease-in-out">
+
+    <button data-target="archivement-picture"
+      class="tab-button text-sm px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+      <i class="fas fa-image mr-1"></i> Picture
+    </button>
+
+    <button data-target="archivement-video"
+      class="tab-button text-sm px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+      <i class="fas fa-video mr-1"></i> Video
+    </button>
+    <br>
+    <button data-target="archivement-3d"
+      class="tab-button text-sm px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+      <i class="fas fa-cube mr-1"></i> 3D
+    </button>
+
+  </div>
+</div>
+
 
 
   </nav>
@@ -239,8 +270,88 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Panel Ảnh -->
+            <div id="archivement-picture" class="tab-panel">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Photo Gallery</h2> <h3>These are models that I made to illustrate for students in secondary and elementary school</h3> <br>
+                    <div id="photo-gallery" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="group relative cursor-pointer"><img class="gallery-item h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105" src="./Robot/z6796195514531_8b62a4312eebb73038160cb49981f71f.jpg" alt="Ảnh dự án 1"></div>
+                        <div class="group relative cursor-pointer"><img class="gallery-item h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105" src="./Robot/z6825587813754_68794c5ac5c31de7e1ed4c4945b245d5.jpg" alt="Ảnh dự án 2"></div>
+                        <div class="group relative cursor-pointer"><img class="gallery-item h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105" src="./Robot/z6842077220376_e944125cb5af4fc053e64cd7d77fecf9.jpg" alt="Ảnh dự án 3"></div>
+                        <div class="group relative cursor-pointer"><img class="gallery-item h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105" src="./Robot/z6825833009735_52d331538137ebdbfe1293603ce4ef11.jpg" alt="Ảnh dự án 4"></div>
+                        <div class="group relative cursor-pointer"><img class="gallery-item h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105" src="./Robot/z6796248346864_c5a02f00ef1922429685baa21ff59256.jpg" alt="Ảnh dự án 5"></div>
+                        <div class="group relative cursor-pointer"><img class="gallery-item h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105" src="./Robot/z6842222397038_5c6ca75b0e6187b7d3545591fe8ed09d.jpg" alt="Ảnh dự án 6"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Video -->   
+             <div id="archivement-video" class="tab-panel">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                   <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Video Library</h2> <h3?>These are videos illustrating for students in secondary and elementary school how its work</h3> <br> <br>
+                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                       <div class="video-item group relative rounded-lg overflow-hidden shadow-lg cursor-pointer" data-youtube-id="Ena9oHXRA7I">
+                           <img class="w-full h-48 object-cover" src="./Robot/maxresdefault.jpg" alt="Video Robot Bird STEAM AI">
+                           <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center"><div class="w-16 h-16 bg-white bg-opacity-30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"><i class="fas fa-play text-white text-3xl"></i></div></div>
+                       </div>
+                       <div class="video-item group relative rounded-lg overflow-hidden shadow-lg cursor-pointer" data-youtube-id="yg2sPPIzaEs">
+                           <img class="w-full h-48 object-cover" src="./Robot/maxresdefault (1).jpg" alt="Video Traffic light">
+                           <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center"><div class="w-16 h-16 bg-white bg-opacity-30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"><i class="fas fa-play text-white text-3xl"></i></div></div>
+                       </div>
+                       <div class="video-item group relative rounded-lg overflow-hidden shadow-lg cursor-pointer" data-youtube-id="SXMakGrYgAg">
+                           <img class="w-full h-48 object-cover" src="./Robot/maxresdefault (2).jpg" alt="Video AI classify dog and cat">
+                           <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center"><div class="w-16 h-16 bg-white bg-opacity-30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"><i class="fas fa-play text-white text-3xl"></i></div></div>
+                       </div>
+                       <div class="video-item group relative rounded-lg overflow-hidden shadow-lg cursor-pointer" data-youtube-id="k4y2XTxBFMQ">
+                           <img class="w-full h-48 object-cover" src="./Robot/maxresdefault (3).jpg" alt="Video Robot fighter">
+                           <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center"><div class="w-16 h-16 bg-white bg-opacity-30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"><i class="fas fa-play text-white text-3xl"></i></div></div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+            <!-- Panel 3D Models -->
+            <div id="archivement-3d" class="tab-panel">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">3D</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- SỬA LỖI: Thay đổi class thành "spline-item" để mở đúng popup -->
+                        <div class="spline-item group relative rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 cursor-pointer">
+                            <!-- SỬA LỖI: Thay thế đường dẫn cục bộ bằng URL công khai -->
+                            <img class="w-full h-56 object-cover" src="./3D/z6852759642443_89ab237dc1d0a62e8bcf9a8f9d07162b.jpg" alt="Mô hình Spline">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-4">
+                                <h3 class="text-lg font-bold text-white">Robot Cat</h3>
+                                <p class="text-sm text-gray-300">Mô hình mẫu từ Công ty AI VIET NAM</p>
+                            </div>
+                            <div class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">SPLINE</div>
+                        </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <!-- SỬA LỖI: Thay đổi class thành "spline-item2" để mở đúng popup -->
+                        <div class="spline-item2 group relative rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 cursor-pointer">
+                            <!-- SỬA LỖI: Thay thế đường dẫn cục bộ bằng URL công khai -->
+                            <img class="w-full h-56 object-cover" src="./3D/z6852762901616_775be953887d46504f8e59d391e8105a.jpg" alt="Mô hình Spline2">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-4">
+                                <h3 class="text-lg font-bold text-white">Robot Dog</h3>
+                                <p class="text-sm text-gray-300">Mô hình mẫu từ Công ty AI VIET NAM</p>
+                            </div>
+                            <div class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">SPLINE</div>
+                        </div>    
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
+
+    
 
     <!-- MODALS / POPUPS -->
     <div id="lightbox-modal" class="modal-hidden fixed inset-0 z-50 flex items-center justify-center p-4"><div class="modal-overlay fixed inset-0 bg-black/80"></div><div class="modal-content relative w-full h-full max-w-4xl max-h-4xl flex items-center justify-center"><img id="lightbox-image" src="" class="max-w-full max-h-full object-contain rounded-lg" alt="Ảnh phóng to"><button id="lightbox-close" class="absolute -top-2 -right-2 md:top-2 md:right-2 text-white bg-black/50 rounded-full w-10 h-10 flex items-center justify-center text-2xl hover:bg-black/80 transition">×</button><button id="lightbox-prev" class="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 text-white bg-black/50 rounded-full w-12 h-12 flex items-center justify-center text-2xl hover:bg-black/80 transition"><i class="fas fa-chevron-left"></i></button><button id="lightbox-next" class="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 text-white bg-black/50 rounded-full w-12 h-12 flex items-center justify-center text-2xl hover:bg-black/80 transition"><i class="fas fa-chevron-right"></i></button></div></div>
